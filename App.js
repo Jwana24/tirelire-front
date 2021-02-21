@@ -1,21 +1,42 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { useFonts } from 'expo-font';
+import AppLoading from 'expo-app-loading';
+
+import Homepage from './components/Homepage/Homepage';
+import Menu from './components/Menu/Menu';
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+    let [fontsLoaded] = useFonts({
+        'Rubik-Bold': require('./assets/fonts/Rubik/Rubik-Bold.ttf'),
+        'Rubik-BoldItalic': require('./assets/fonts/Rubik/Rubik-BoldItalic.ttf'),
+        'Rubik-Light': require('./assets/fonts/Rubik/Rubik-Light.ttf'),
+        'Rubik-LightItalic': require('./assets/fonts/Rubik/Rubik-LightItalic.ttf'),
+        'Rubik-Medium': require('./assets/fonts/Rubik/Rubik-Medium.ttf'),
+        'Rubik-MediumItalic': require('./assets/fonts/Rubik/Rubik-MediumItalic.ttf'),
+        'Rubik-Regular': require('./assets/fonts/Rubik/Rubik-Regular.ttf'),
+        'Rubik-RegularItalic': require('./assets/fonts/Rubik/Rubik-Italic.ttf'),
+    });
+
+    if(!fontsLoaded) {
+        return <AppLoading />;
+    } else {
+        return (
+            <View style={styles.container}>
+                <Homepage />
+                <Menu />
+                <StatusBar style="auto" />
+            </View>
+        );
+    }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
 });
