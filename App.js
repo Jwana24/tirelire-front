@@ -1,11 +1,11 @@
-import { StatusBar } from 'expo-status-bar';
+// import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
+import { NavigationContainer } from '@react-navigation/native';
 
-import Homepage from './components/Homepage/Homepage';
-import Menu from './components/Menu/Menu';
+import Navigation from './components/Navigation/Navigation';
 
 export default function App() {
     let [fontsLoaded] = useFonts({
@@ -23,11 +23,9 @@ export default function App() {
         return <AppLoading />;
     } else {
         return (
-            <View style={styles.container}>
-                <Homepage />
-                <Menu />
-                <StatusBar style="auto" />
-            </View>
+            <NavigationContainer style={styles.container}>
+                <Navigation />
+            </NavigationContainer>
         );
     }
 }

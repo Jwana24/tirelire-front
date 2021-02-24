@@ -1,9 +1,12 @@
 import React from 'react';
 import {
-    StyleSheet, View, Image, Text
+    StyleSheet, View, Image, Text, TouchableOpacity
 } from 'react-native';
 
-const Homepage = () => {
+import Income from './Income/Income';
+import Expense from './Expense/Expense';
+
+const Homepage = ({navigation}) => {
     let income = 2000;
     let expense = 665;
     let total = income - expense;
@@ -11,26 +14,38 @@ const Homepage = () => {
     return(
         <View style={styles.containerHomepage}>
             <View style={styles.containerTitle}>
-                <Image source={require('../../assets/icons/money-logo.png')} style={styles.iconLogo} />
+                <Image source={require('../../../assets/icons/money-logo.png')} style={styles.iconLogo} />
                 <Text style={styles.textTitle}>Tirelire de poche</Text>
             </View>
 
             <View style={styles.containerIncome}>
                 <View style={styles.containerImgIncome}>
-                    <Image source={require('../../assets/icons/argent.png')} style={styles.iconIcome} />
+                    <Image source={require('../../../assets/icons/argent.png')} style={styles.iconIcome} />
                 </View>
                 <Text style={styles.textIncome}>Mon argent total</Text>
                 <Text style={styles.separator} />
                 <Text style={styles.textMoney}>{income} €</Text>
+
+                <View style={styles.containerBtnUpdate}>
+                    <TouchableOpacity
+                        onPress={() => navigation.navigate('Revenus')}
+                    >
+                        <Income />
+                    </TouchableOpacity>
+                </View>
             </View>
 
             <View style={styles.containerExpense}>
                 <View style={styles.containerImgExpense}>
-                    <Image source={require('../../assets/icons/depenses.png')} style={styles.iconIcome} />
+                    <Image source={require('../../../assets/icons/depenses.png')} style={styles.iconIcome} />
                 </View>
                 <Text style={styles.textExpense}>Mes dépenses totales</Text>
                 <Text style={styles.separator} />
                 <Text style={styles.textMoney}>{expense} €</Text>
+
+                <View style={styles.containerBtnUpdate}>
+                    <Expense />
+                </View>
             </View>
 
             <View style={styles.containerTotal}>
@@ -43,13 +58,15 @@ const Homepage = () => {
 
 const styles = StyleSheet.create({
     containerHomepage: {
-        flex: 19,
+        flex: 8,
         marginTop: 30,
     },
     containerTitle: {
+        flex: 0.3,
         flexDirection: 'row',
         alignItems: 'center',
-        marginBottom: 50
+        justifyContent: 'center',
+        marginBottom: 40,
     },
     iconLogo: {
         width: 58,
@@ -63,6 +80,7 @@ const styles = StyleSheet.create({
     },
     // Container vert argent
     containerIncome: {
+        flex: 0.7,
         position: 'relative',
         alignItems: 'center',
         paddingVertical: 20,
@@ -108,6 +126,7 @@ const styles = StyleSheet.create({
     },
     // Container rouge dépenses
     containerExpense: {
+        flex: 0.7,
         position: 'relative',
         alignItems: 'center',
         marginTop: 50,
@@ -137,6 +156,7 @@ const styles = StyleSheet.create({
     },
     // Total
     containerTotal: {
+        flex: 0.4,
         alignItems: 'center',
         paddingTop: 10,
     },
@@ -147,6 +167,21 @@ const styles = StyleSheet.create({
     priceTotal: {
         fontFamily: 'Rubik-Medium',
         fontSize: 30,
+    },
+    containerBtnUpdate: {
+        alignItems: 'center',
+        justifyContent: 'center',
+        position: 'absolute',
+        bottom: '-10%',
+        right: '-8%',
+        width: 52,
+        height: 52,
+        backgroundColor: '#FFF',
+        borderRadius: 50,
+        shadowColor: '#bdc3c7',
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.8,
+        shadowRadius: 2,
     },
 });
 
