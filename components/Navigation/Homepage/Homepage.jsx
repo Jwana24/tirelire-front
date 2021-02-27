@@ -4,7 +4,7 @@ import {
 } from 'react-native';
 
 import Income from './Income/Income';
-import Expense from './Expense/Expense';
+import FixExpense from './FixExpense/FixExpense';
 
 const Homepage = ({navigation}) => {
     let income = 2000;
@@ -44,7 +44,11 @@ const Homepage = ({navigation}) => {
                 <Text style={styles.textMoney}>{expense} €</Text>
 
                 <View style={styles.containerBtnUpdate}>
-                    <Expense />
+                    <TouchableOpacity
+                        onPress={() => navigation.navigate('Dépenses fixes')}
+                    >
+                        <FixExpense />
+                    </TouchableOpacity>
                 </View>
             </View>
 

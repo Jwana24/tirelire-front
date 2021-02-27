@@ -7,44 +7,10 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import Homepage from './Homepage/Homepage';
 import Income from './Homepage/Income/Income';
-
-const Tab = createBottomTabNavigator();
-const Stack = createStackNavigator();
-
-const navOptionHandler = () => ({
-    headerShown: false
-});
+import FixExpense from './Homepage/FixExpense/FixExpense';
 
 const CustomHeader = ({ title, isHome, navigation }) => {
     return (
-        // <View style={{ flexDirection: 'row', height: 50, backgroundColor: '#5CBF91' }}>
-        //     {
-        //         isHome ?
-        //         <View style={{ flex: 1, justifyContent: 'center' }}>
-        //             {/* <Image
-        //                 source={require('../../assets/icons/menu.png')}
-        //                 style={{ width: 38, height: 22, marginLeft: 5 }}
-        //                 resizeMode='contain'
-        //             /> */}
-        //         </View> :
-        //         <TouchableOpacity
-        //             style={{ flexDirection: 'row', alignItems: 'center' }}
-        //             onPress={() => navigation.goBack()}
-        //         >
-        //             <Image
-        //                 source={require('../../assets/icons/left-arrow.png')}
-        //                 style={{ width: 18, height: 18, marginLeft: 5, marginRight: 5 }}
-        //                 resizeMode='contain'
-        //             />
-        //             <Text>Retour</Text>
-        //         </TouchableOpacity>
-        //     }
-
-        //     <View style={{ flex: 1.5, justifyContent: 'center' }}>
-        //         <Text style={{ textAlign: 'center', color: 'white' }}>{title}</Text>
-        //     </View>
-        //     <View style={{ flex: 1 }}></View>
-        // </View>
         <View style={{ flexDirection: 'row', height: 50, backgroundColor: '#5CBF91' }}>
             <View style={{ flex: 1, justifyContent: 'center' }}>
                 {
@@ -76,6 +42,16 @@ const CustomHeader = ({ title, isHome, navigation }) => {
         </View>
     )
 }
+
+const Tab = createBottomTabNavigator();
+const StackHome = createStackNavigator();
+const StackIncome = createStackNavigator();
+const StackFixExpense = createStackNavigator();
+
+const navOptionHandler = () => ({
+    headerShown: false
+});
+
 const HomeScreen = ({navigation}) => {
     return (
         <SafeAreaView style={{ flex: 1 }}>
@@ -92,9 +68,9 @@ const HomeScreen = ({navigation}) => {
 }
 const HomeStack = () => {
     return(
-        <Stack.Navigator initialRouteName='Accueil'>
-            <Stack.Screen name='Accueil' component={HomeScreen} options={navOptionHandler} />
-        </Stack.Navigator>
+        <StackHome.Navigator initialRouteName='Accueil'>
+            <StackHome.Screen name='Accueil' component={HomeScreen} options={navOptionHandler} />
+        </StackHome.Navigator>
     )
 }
 
@@ -114,18 +90,68 @@ const IncomeScreen = ({navigation}) => {
 }
 const IncomeStack = () => {
     return(
-        <Stack.Navigator initialRouteName='Revenus'>
-            <Stack.Screen name='Revenus' component={IncomeScreen} options={navOptionHandler} />
-        </Stack.Navigator>
+        <StackIncome.Navigator initialRouteName='Revenus'>
+            <StackIncome.Screen name='Revenus' component={IncomeScreen} options={navOptionHandler} />
+        </StackIncome.Navigator>
+    )
+}
+
+const FixExpenseScreen = ({navigation}) => {
+    return (
+        <SafeAreaView style={{ flex: 1 }}>
+            <CustomHeader title='Dépenses fixes' navigation={navigation} />
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <TouchableOpacity
+                    onPress={() => navigation.navigate('Depenses-fixes')}
+                >
+                    <FixExpense />
+                </TouchableOpacity>
+            </View>
+        </SafeAreaView>
+    )
+}
+const FixExpenseStack = () => {
+    return(
+        <StackFixExpense.Navigator initialRouteName='Depenses-fixes'>
+            <StackFixExpense.Screen name='Depenses-fixes' component={FixExpenseScreen} options={navOptionHandler} />
+        </StackFixExpense.Navigator>
     )
 }
 
 
 const Navigation = () => {
     return(
-        <Tab.Navigator>
+        <Tab.Navigator
+            screenOptions={({ route }) => ({
+                tabBarIcon: ({ focused, color, size }) => {
+                    let iconName;
+        
+                    if (route.name === 'Accueil') {
+                        iconName = focused
+                        ? require('../../assets/icons/home.png')
+                        : require('../../assets/icons/home.png');
+                    } else if (route.name === 'Revenus') {
+                        iconName = focused
+                        ? require('../../assets/icons/argent.png')
+                        : require('../../assets/icons/argent.png');
+                    } else if (route.name === 'Dépenses fixes') {
+                        iconName = focused
+                        ? require('../../assets/icons/depenses.png')
+                        : require('../../assets/icons/depenses.png');
+                    }
+        
+                    // You can return any component that you like here!
+                    return <Image source={iconName} style={{ width: 20, height: 20, resizeMode: 'contain' }} />;
+                },
+            })}
+            tabBarOptions={{
+                activeTintColor: '#5CBF91',
+                inactiveTintColor: 'black',
+            }}
+        >
             <Tab.Screen name="Accueil" component={HomeStack} />
             <Tab.Screen name="Revenus" component={IncomeStack} />
+            <Tab.Screen name="Dépenses fixes" component={FixExpenseStack} />
         </Tab.Navigator>
 
         // <View style={styles.containerMenu}>
