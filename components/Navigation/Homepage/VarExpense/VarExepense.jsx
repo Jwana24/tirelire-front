@@ -3,10 +3,10 @@ import {
     StyleSheet, View, Image, Text
 } from 'react-native';
 
-const FixExpense = () => {
+const VarExpense = () => {
     return (
         <View>
-            <Text>Dépenses fixes</Text>
+            <Image source={require('../../../../assets/icons/edit-red.png')} style={styles.iconExpense} />
         </View>
     );
 }
@@ -18,4 +18,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default FixExpense;
+export default VarExpense;

@@ -6,8 +6,10 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import Homepage from './Homepage/Homepage';
+import List from './Homepage/List/List';
 import Income from './Homepage/Income/Income';
 import FixExpense from './Homepage/FixExpense/FixExpense';
+import VarExpense from './Homepage/VarExpense/VarExepense';
 
 const CustomHeader = ({ title, isHome, navigation }) => {
     return (
@@ -45,8 +47,10 @@ const CustomHeader = ({ title, isHome, navigation }) => {
 
 const Tab = createBottomTabNavigator();
 const StackHome = createStackNavigator();
+const StackList = createStackNavigator();
 const StackIncome = createStackNavigator();
 const StackFixExpense = createStackNavigator();
+const StackVarExpense = createStackNavigator();
 
 const navOptionHandler = () => ({
     headerShown: false
@@ -71,6 +75,28 @@ const HomeStack = () => {
         <StackHome.Navigator initialRouteName='Accueil'>
             <StackHome.Screen name='Accueil' component={HomeScreen} options={navOptionHandler} />
         </StackHome.Navigator>
+    )
+}
+
+const ListScreen = ({navigation}) => {
+    return (
+        <SafeAreaView style={{ flex: 1 }}>
+            <CustomHeader title='Liste des dépenses' navigation={navigation} />
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <TouchableOpacity
+                    onPress={() => navigation.navigate('Liste')}
+                >
+                    <List navigation={navigation} />
+                </TouchableOpacity>
+            </View>
+        </SafeAreaView>
+    )
+}
+const ListStack = () => {
+    return(
+        <StackList.Navigator initialRouteName='Liste'>
+            <StackList.Screen name='Liste' component={ListScreen} options={navOptionHandler} />
+        </StackList.Navigator>
     )
 }
 
@@ -118,26 +144,56 @@ const FixExpenseStack = () => {
     )
 }
 
+const VarExpenseScreen = ({navigation}) => {
+    return (
+        <SafeAreaView style={{ flex: 1 }}>
+            <CustomHeader title='Dépenses variables' navigation={navigation} />
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                <TouchableOpacity
+                    onPress={() => navigation.navigate('Depenses-variables')}
+                >
+                    <VarExpense />
+                </TouchableOpacity>
+            </View>
+        </SafeAreaView>
+    )
+}
+const VarExpenseStack = () => {
+    return(
+        <StackVarExpense.Navigator initialRouteName='Depenses-variables'>
+            <StackVarExpense.Screen name='Depenses-variables' component={VarExpenseScreen} options={navOptionHandler} />
+        </StackVarExpense.Navigator>
+    )
+}
+
 
 const Navigation = () => {
     return(
         <Tab.Navigator
             screenOptions={({ route }) => ({
-                tabBarIcon: ({ focused, color, size }) => {
+                tabBarIcon: ({ focused }) => {
                     let iconName;
         
                     if (route.name === 'Accueil') {
                         iconName = focused
                         ? require('../../assets/icons/home.png')
-                        : require('../../assets/icons/home.png');
+                        : require('../../assets/icons/home-black.png');
+                    } else if (route.name === 'Liste') {
+                        iconName = focused
+                        ? require('../../assets/icons/liste.png')
+                        : require('../../assets/icons/liste-black.png');
                     } else if (route.name === 'Revenus') {
                         iconName = focused
-                        ? require('../../assets/icons/argent.png')
-                        : require('../../assets/icons/argent.png');
-                    } else if (route.name === 'Dépenses fixes') {
+                        ? require('../../assets/icons/revenus.png')
+                        : require('../../assets/icons/revenus-black.png');
+                    } else if (route.name === 'Dépenses f.') {
                         iconName = focused
-                        ? require('../../assets/icons/depenses.png')
-                        : require('../../assets/icons/depenses.png');
+                        ? require('../../assets/icons/depenses-fixes.png')
+                        : require('../../assets/icons/depenses-fixes-black.png');
+                    } else if (route.name === 'Dépenses v.') {
+                        iconName = focused
+                        ? require('../../assets/icons/depenses-variables.png')
+                        : require('../../assets/icons/depenses-variables-black.png');
                     }
         
                     // You can return any component that you like here!
@@ -150,86 +206,12 @@ const Navigation = () => {
             }}
         >
             <Tab.Screen name="Accueil" component={HomeStack} />
+            <Tab.Screen name="Liste" component={ListStack} />
             <Tab.Screen name="Revenus" component={IncomeStack} />
-            <Tab.Screen name="Dépenses fixes" component={FixExpenseStack} />
+            <Tab.Screen name="Dépenses f." component={FixExpenseStack} />
+            <Tab.Screen name="Dépenses v." component={VarExpenseStack} />
         </Tab.Navigator>
-
-        // <View style={styles.containerMenu}>
-        //     <View style={styles.containerAllMenus}>
-        //         <Image source={require('../../assets/icons/home.png')} style={styles.imgHome} />
-        //         <Text style={styles.titleMenu}>Accueil</Text>
-        //     </View>
-        //     <View style={styles.containerAllMenus}>
-        //         <Image source={require('../../assets/icons/list.png')} style={styles.imgList} />
-        //         <Text style={styles.titleMenu}>Liste</Text>
-        //     </View>
-        //     <View style={styles.containerAllMenus}>
-        //         <Image source={require('../../assets/icons/depenses.png')} style={styles.imgExpense} />
-        //         <Text style={styles.titleMenu}>Dépen. f.</Text>
-        //     </View>
-        //     <View style={styles.containerAllMenus}>
-        //         <Image source={require('../../assets/icons/argent.png')} style={styles.imgMoney} />
-        //         <Text style={styles.titleMenu}>Revenus</Text>
-        //     </View>
-        //     <View style={styles.containerAllMenus}>
-        //         <Image source={require('../../assets/icons/depenses.png')} style={styles.imgExpensePlus} />
-        //         <Text style={styles.expensePlus}>+</Text>
-        //         <Text style={styles.titleMenu}>Dépen. v.</Text>
-        //     </View>
-        // </View>
     );
 }
-
-const styles = StyleSheet.create({
-    containerMenu: {
-        flex: 1,
-        flexDirection: 'row',
-        justifyContent: 'space-around',
-        alignItems: 'center',
-        width: '100%',
-        backgroundColor: '#5CBF91',
-    },
-    containerAllMenus: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    imgHome: {
-        flex: 0.4,
-        width: 32,
-        height: 32,
-    },
-    imgList: {
-        flex: 0.4,
-        width: 30,
-        height: 34,
-    },
-    imgExpense: {
-        flex: 0.4,
-        width: 35,
-        height: 29,
-    },
-    imgMoney: {
-        flex: 0.4,
-        width: 37,
-        height: 31,
-    },
-    imgExpensePlus: {
-        flex: 0.4,
-        width: 35,
-        height: 29,
-    },
-    expensePlus: {
-        position: 'absolute',
-        top: '-7%',
-        left: '25%',
-        fontSize: 18,
-        fontFamily: 'Rubik-Bold',
-    },
-    titleMenu: {
-        flex: 0.2,
-        textAlign: 'center',
-    },
-});
 
 export default Navigation;

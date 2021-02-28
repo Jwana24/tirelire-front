@@ -20,7 +20,7 @@ const Homepage = ({navigation}) => {
 
             <View style={styles.containerIncome}>
                 <View style={styles.containerImgIncome}>
-                    <Image source={require('../../../assets/icons/argent.png')} style={styles.iconIcome} />
+                    <Image source={require('../../../assets/icons/revenus.png')} style={styles.iconIcome} />
                 </View>
                 <Text style={styles.textIncome}>Mon argent total</Text>
                 <Text style={styles.separator} />
@@ -30,14 +30,14 @@ const Homepage = ({navigation}) => {
                     <TouchableOpacity
                         onPress={() => navigation.navigate('Revenus')}
                     >
-                        <Income />
+                        <Image source={require('../../../assets/icons/edit-green.png')} style={styles.iconPen} />
                     </TouchableOpacity>
                 </View>
             </View>
 
             <View style={styles.containerExpense}>
                 <View style={styles.containerImgExpense}>
-                    <Image source={require('../../../assets/icons/depenses.png')} style={styles.iconIcome} />
+                    <Image source={require('../../../assets/icons/depenses-fixes.png')} style={styles.iconIcome} />
                 </View>
                 <Text style={styles.textExpense}>Mes dépenses totales</Text>
                 <Text style={styles.separator} />
@@ -45,9 +45,9 @@ const Homepage = ({navigation}) => {
 
                 <View style={styles.containerBtnUpdate}>
                     <TouchableOpacity
-                        onPress={() => navigation.navigate('Dépenses fixes')}
+                        onPress={() => navigation.navigate('Depenses-fixes')}
                     >
-                        <FixExpense />
+                        <Image source={require('../../../assets/icons/edit-red.png')} style={styles.iconPen} />
                     </TouchableOpacity>
                 </View>
             </View>
@@ -94,18 +94,17 @@ const styles = StyleSheet.create({
     },
     containerImgIncome: {
         position: 'absolute',
-        top: '-30%',
+        top: '-35%',
         backgroundColor: '#A0D4A0',
         borderWidth: 4,
         borderColor: '#FFF',
-        paddingHorizontal: 10,
-        paddingVertical: 13,
+        padding: 10,
         borderRadius: 70,
 
     },
     iconIcome: {
         width: 49,
-        height: 42,
+        height: 49,
     },
     textIncome: {
         width: 150,
@@ -141,12 +140,11 @@ const styles = StyleSheet.create({
     },
     containerImgExpense: {
         position: 'absolute',
-        top: '-30%',
+        top: '-35%',
         backgroundColor: '#EB4D4B',
         borderWidth: 4,
         borderColor: '#FFF',
-        paddingHorizontal: 10,
-        paddingVertical: 13,
+        padding: 10,
         borderRadius: 70,
     },
     textExpense: {
@@ -186,6 +184,10 @@ const styles = StyleSheet.create({
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.8,
         shadowRadius: 2,
+    },
+    iconPen: {
+        width: 27,
+        height: 26,
     },
 });
 

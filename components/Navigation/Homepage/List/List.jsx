@@ -3,10 +3,10 @@ import {
     StyleSheet, View, Image, Text
 } from 'react-native';
 
-const FixExpense = () => {
+const List = () => {
     return (
         <View>
-            <Text>Dépenses fixes</Text>
+            <Image source={require('../../../../assets/icons/liste.png')} style={styles.iconExpense} />
         </View>
     );
 }
@@ -18,4 +18,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default FixExpense;
+export default List;
