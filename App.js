@@ -1,9 +1,10 @@
-// import { StatusBar } from 'expo-status-bar';
+import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Text } from 'react-native';
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
 import { NavigationContainer } from '@react-navigation/native';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 import Navigation from './components/Navigation/Navigation';
 
@@ -20,12 +21,15 @@ export default function App() {
     });
 
     if(!fontsLoaded) {
-        return <AppLoading />;
+        return <SafeAreaProvider><AppLoading /></SafeAreaProvider>;
     } else {
         return (
-            <NavigationContainer style={styles.container}>
-                <Navigation />
-            </NavigationContainer>
+            <SafeAreaProvider>
+                <NavigationContainer style={styles.container}>
+                    <Navigation />
+                    <StatusBar />
+                </NavigationContainer>
+            </SafeAreaProvider>
         );
     }
 }
