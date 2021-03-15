@@ -32,6 +32,7 @@ const Income = () => {
         Axios.get(`${API_URL}/api/incomes`)
         .then(res => {
             setIncomeData(res.data);
+            // console.log('test')
         })
         .catch(err => {
             console.log(err);
@@ -71,24 +72,22 @@ const Income = () => {
                                 <Image source={require('../../../../assets/icons/revenus.png')} />
                             </View>
                         </View>
+
+                        <View style={styles.containerNewIncome}>
+                            <View style={styles.containerAddNewIncome}>
+                                <Text style={styles.addNewIncome}>+</Text>
+                            </View>
+                            <View>
+                                <Text style={styles.textNewIncome}>Ajouter une nouvelle entrée</Text>
+                            </View>
+                        </View>
+
                         <View style={styles.containerIncomeForms}>
-
-                            {/* {incomeData && incomeData.map(elem => {
-                                return (
-                                    <View style={styles.containerForm}>
-                                        <FormIncome
-                                            elem={elem}
-                                            keyExtractor={elem => elem.income_id.toString()}    
-                                        />
-                                    </View> */}
-                                    <FlatList
-                                        data={incomeData}
-                                        keyExtractor={(item) => item.income_id}
-                                        renderItem={({ item }) => <FormIncome income={item} />}
-                                    />
-                                {/* )
-                            })} */}
-
+                            <FlatList
+                                data={incomeData}
+                                keyExtractor={(item) => item.income_id}
+                                renderItem={({ item }) => <FormIncome income={item} />}
+                            />
                         </View>
                     </View>
                 </ScrollView>
@@ -111,6 +110,38 @@ const styles = StyleSheet.create({
         padding: 10,
         backgroundColor: '#A0D4A0',
         borderRadius: 50,
+    },
+    containerNewIncome: {
+        marginTop: 20,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    containerAddNewIncome: {
+        alignItems: 'center',
+        width: 53,
+        height: 53,
+        backgroundColor: '#FFF',
+        borderRadius: 50,
+        shadowColor: '#000',
+        shadowOffset: {
+            width: 3,
+            height: 3
+        },
+        shadowOpacity: 0.1,
+        shadowRadius: 3,
+    },
+    addNewIncome: {
+        textAlign: 'center',
+        fontSize: 40,
+        color: '#A0D4A0',
+    },
+    textNewIncome: {
+        paddingLeft: 10,
+        width: 200,
+        fontFamily: 'Rubik-Light',
+        fontSize: 20,
+        color: '#2D3436',
     },
     containerIncomeForms: {
         marginTop: 30,

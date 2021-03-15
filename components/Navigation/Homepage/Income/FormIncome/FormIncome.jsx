@@ -3,30 +3,11 @@ import { FlatList } from 'react-native';
 import {
     StyleSheet, View, TextInput, Text, Image, Controller, TouchableWithoutFeedback
 } from 'react-native';
-// import DatePicker from 'react-native-date-picker';
-// import DatePicker from 'react-native-datepicker';
-import DateTimePickerModal from "react-native-modal-datetime-picker";
+import DateTimePicker from '@react-native-community/datetimepicker';
 import { Button } from 'react-native-elements';
 import { Divider } from 'react-native-paper';
 
-// import iconPrice from '../../../../assets/icons/'
-
 const FormIncome = ({ income }) => {
-    const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-    const [isVisible, setVisible] = useState(false);
-
-    const showDatePicker = () => {
-        setDatePickerVisibility(true);
-    };
-
-    const hideDatePicker = () => {
-        setDatePickerVisibility(false);
-    };
-
-    const handleConfirm = (date) => {
-        console.warn("Une date a été choisie: ", date);
-        hideDatePicker();
-    };
 
     return (
         <View>
@@ -54,23 +35,14 @@ const FormIncome = ({ income }) => {
                     style={styles.iconCalendar}
                 />
 
-                <View style={styles.input}>
-                {/* <TouchableWithoutFeedback>
-                    <TextInput
-                        style={styles.input}
-                        value={income.income_date.toString()}
-                    />
-                </TouchableWithoutFeedback> */}
+                <View>
 
-                <DateTimePickerModal
-                    mode='datetime'
-                    isVisible={isVisible}
-                    onConfirm={(date) => {
-                        setVisible(false); // <- first thing
-                        setValue(parseDate(date)); 
-                    }}
-                    onCancel={() => setVisible(false)}
-                />
+                    <DateTimePicker
+                        value={income.income_date}
+                        mode='date'
+                        style={styles.input}
+                        // onChange={}
+                    />
                 </View>
             </View>
 
@@ -87,8 +59,6 @@ const FormIncome = ({ income }) => {
 
 const styles = StyleSheet.create({
     nameIncome: {
-        // marginBottom: 10,
-        paddingTop: 20,
         fontFamily: 'Rubik-Regular',
         fontSize: 26,
         textAlign: 'center'
@@ -100,8 +70,8 @@ const styles = StyleSheet.create({
         color: '#2D3436',
     },
     input: {
-        height: 50,
-        paddingVertical: 10,
+        height: 40,
+        // paddingVertical: 5,
         paddingHorizontal: 15,
         borderWidth: 1,
         borderColor: '#A0D4A0',
@@ -109,14 +79,14 @@ const styles = StyleSheet.create({
     },
     iconEuro: {
         position: 'absolute',
-        top: 65,
+        top: 60,
         right: 10,
         width: 26,
         height: 24,
     },
     iconCalendar: {
         position: 'absolute',
-        top: 67,
+        top: 62,
         right: 15,
         width: 21,
         height: 19,
