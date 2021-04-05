@@ -3,7 +3,7 @@ import { FlatList } from 'react-native';
 import {
     StyleSheet, View, TextInput, Text, Image, Controller, TouchableWithoutFeedback
 } from 'react-native';
-import DateTimePicker from '@react-native-community/datetimepicker';
+// import DateTimePicker from '@react-native-community/datetimepicker';
 import { Button } from 'react-native-elements';
 import { Divider } from 'react-native-paper';
 
@@ -37,12 +37,11 @@ const FormIncome = ({ income }) => {
 
                 <View>
 
-                    <DateTimePicker
+                    {/* <DateTimePicker
                         value={income.income_date}
                         mode='date'
                         style={styles.input}
-                        // onChange={}
-                    />
+                    /> */}
                 </View>
             </View>
 

@@ -7,6 +7,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import Homepage from './Homepage/Homepage';
 import List from './Homepage/List/List';
+import Form from './Form/Form';
 import Income from './Homepage/Income/Income';
 import FixExpense from './Homepage/FixExpense/FixExpense';
 import VarExpense from './Homepage/VarExpense/VarExepense';
@@ -48,9 +49,10 @@ const CustomHeader = ({ title, isHome, navigation }) => {
 const Tab = createBottomTabNavigator();
 const StackHome = createStackNavigator();
 const StackList = createStackNavigator();
-const StackIncome = createStackNavigator();
-const StackFixExpense = createStackNavigator();
-const StackVarExpense = createStackNavigator();
+const StackVar = createStackNavigator();
+// const StackIncome = createStackNavigator();
+// const StackFixExpense = createStackNavigator();
+// const StackVarExpense = createStackNavigator();
 
 const navOptionHandler = () => ({
     headerShown: false
@@ -100,72 +102,49 @@ const ListStack = () => {
     )
 }
 
-const IncomeScreen = ({navigation}) => {
+// const VarIncomeScreen = ({navigation}) => {
+//     return (
+//         <SafeAreaView style={{ flex: 1 }}>
+//             <CustomHeader title='Revenus variables' navigation={navigation} />
+//             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+//                 <TouchableOpacity
+//                     onPress={() => navigation.navigate('Revenus-variables')}
+//                 >
+//                     <Income />
+//                 </TouchableOpacity>
+//             </View>
+//         </SafeAreaView>
+//     )
+// }
+// const VarIncomeStack = () => {
+//     return(
+//         <StackIncome.Navigator initialRouteName='Revenus-variables'>
+//             <StackIncome.Screen name='Revenus-variables' component={VarIncomeScreen} options={navOptionHandler} />
+//         </StackIncome.Navigator>
+//     )
+// }
+
+const VarScreen = ({navigation}) => {
     return (
         <SafeAreaView style={{ flex: 1 }}>
-            <CustomHeader title='Revenus' navigation={navigation} />
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            <CustomHeader title='Transactions variables' navigation={navigation} />
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#ffff' }}>
                 <TouchableOpacity
-                    onPress={() => navigation.navigate('Revenus')}
+                    onPress={() => navigation.navigate('Transactions-variables')}
                 >
-                    <Income />
+                    <Form />
                 </TouchableOpacity>
             </View>
         </SafeAreaView>
     )
 }
-const IncomeStack = () => {
+const VarStack = () => {
     return(
-        <StackIncome.Navigator initialRouteName='Revenus'>
-            <StackIncome.Screen name='Revenus' component={IncomeScreen} options={navOptionHandler} />
-        </StackIncome.Navigator>
+        <StackVar.Navigator initialRouteName='Transactions-variables'>
+            <StackVar.Screen name='Transactions-variables' component={VarScreen} options={navOptionHandler} />
+        </StackVar.Navigator>
     )
 }
-
-const FixExpenseScreen = ({navigation}) => {
-    return (
-        <SafeAreaView style={{ flex: 1 }}>
-            <CustomHeader title='Dépenses fixes' navigation={navigation} />
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <TouchableOpacity
-                    onPress={() => navigation.navigate('Depenses-fixes')}
-                >
-                    <FixExpense />
-                </TouchableOpacity>
-            </View>
-        </SafeAreaView>
-    )
-}
-const FixExpenseStack = () => {
-    return(
-        <StackFixExpense.Navigator initialRouteName='Depenses-fixes'>
-            <StackFixExpense.Screen name='Depenses-fixes' component={FixExpenseScreen} options={navOptionHandler} />
-        </StackFixExpense.Navigator>
-    )
-}
-
-const VarExpenseScreen = ({navigation}) => {
-    return (
-        <SafeAreaView style={{ flex: 1 }}>
-            <CustomHeader title='Dépenses variables' navigation={navigation} />
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                <TouchableOpacity
-                    onPress={() => navigation.navigate('Depenses-variables')}
-                >
-                    <VarExpense />
-                </TouchableOpacity>
-            </View>
-        </SafeAreaView>
-    )
-}
-const VarExpenseStack = () => {
-    return(
-        <StackVarExpense.Navigator initialRouteName='Depenses-variables'>
-            <StackVarExpense.Screen name='Depenses-variables' component={VarExpenseScreen} options={navOptionHandler} />
-        </StackVarExpense.Navigator>
-    )
-}
-
 
 const Navigation = () => {
     return(
@@ -182,18 +161,10 @@ const Navigation = () => {
                         iconName = focused
                         ? require('../../assets/icons/liste.png')
                         : require('../../assets/icons/liste-black.png');
-                    } else if (route.name === 'Revenus') {
+                    } else if (route.name === 'Transactions var.') {
                         iconName = focused
                         ? require('../../assets/icons/revenus.png')
                         : require('../../assets/icons/revenus-black.png');
-                    } else if (route.name === 'Dépenses f.') {
-                        iconName = focused
-                        ? require('../../assets/icons/depenses-fixes.png')
-                        : require('../../assets/icons/depenses-fixes-black.png');
-                    } else if (route.name === 'Dépenses v.') {
-                        iconName = focused
-                        ? require('../../assets/icons/depenses-variables.png')
-                        : require('../../assets/icons/depenses-variables-black.png');
                     }
         
                     // You can return any component that you like here!
@@ -207,9 +178,7 @@ const Navigation = () => {
         >
             <Tab.Screen name="Accueil" component={HomeStack} />
             <Tab.Screen name="Liste" component={ListStack} />
-            <Tab.Screen name="Revenus" component={IncomeStack} />
-            <Tab.Screen name="Dépenses f." component={FixExpenseStack} />
-            <Tab.Screen name="Dépenses v." component={VarExpenseStack} />
+            <Tab.Screen name="Transactions var." component={VarStack} />
         </Tab.Navigator>
     );
 }

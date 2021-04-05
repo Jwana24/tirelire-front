@@ -62,11 +62,9 @@ const Homepage = ({navigation}) => {
 
 const styles = StyleSheet.create({
     containerHomepage: {
-        flex: 8,
         marginTop: 30,
     },
     containerTitle: {
-        flex: 0.3,
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
@@ -158,7 +156,6 @@ const styles = StyleSheet.create({
     },
     // Total
     containerTotal: {
-        flex: 0.4,
         alignItems: 'center',
         paddingTop: 10,
     },
