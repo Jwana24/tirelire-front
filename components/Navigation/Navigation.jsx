@@ -1,16 +1,15 @@
 import React from 'react';
 import {
-    StyleSheet, View, Image, Text, TouchableOpacity, SafeAreaView
+    View, Image, Text, TouchableOpacity, SafeAreaView
 } from 'react-native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 
 import Homepage from './Homepage/Homepage';
+import FixIncome from './Homepage/FixIncome/FixIncome';
+import FixExpense from './Homepage/FixExpense/FixExpense';
 import List from './Homepage/List/List';
 import Form from './Form/Form';
-import Income from './Homepage/Income/Income';
-import FixExpense from './Homepage/FixExpense/FixExpense';
-import VarExpense from './Homepage/VarExpense/VarExepense';
 
 const CustomHeader = ({ title, isHome, navigation }) => {
     return (
@@ -46,14 +45,6 @@ const CustomHeader = ({ title, isHome, navigation }) => {
     )
 }
 
-const Tab = createBottomTabNavigator();
-const StackHome = createStackNavigator();
-const StackList = createStackNavigator();
-const StackVar = createStackNavigator();
-// const StackIncome = createStackNavigator();
-// const StackFixExpense = createStackNavigator();
-// const StackVarExpense = createStackNavigator();
-
 const navOptionHandler = () => ({
     headerShown: false
 });
@@ -62,7 +53,7 @@ const HomeScreen = ({navigation}) => {
     return (
         <SafeAreaView style={{ flex: 1 }}>
             <CustomHeader title='Accueil' isHome={true} navigation={navigation} />
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#ffff' }}>
                 <TouchableOpacity
                     onPress={() => navigation.navigate('Accueil')}
                 >
@@ -72,10 +63,42 @@ const HomeScreen = ({navigation}) => {
         </SafeAreaView>
     )
 }
+const FixIncomeScreen = ({navigation}) => {
+    return (
+        <SafeAreaView style={{ flex: 1 }}>
+            <CustomHeader title='Revenus fixes' navigation={navigation} />
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#ffff' }}>
+                <TouchableOpacity
+                    onPress={() => navigation.navigate('Revenus-fixes')}
+                >
+                    <FixIncome navigation={navigation} />
+                </TouchableOpacity>
+            </View>
+        </SafeAreaView>
+    )
+}
+const FixExpenseScreen = ({navigation}) => {
+    return (
+        <SafeAreaView style={{ flex: 1 }}>
+            <CustomHeader title='Dépenses fixes' navigation={navigation} />
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#ffff' }}>
+                <TouchableOpacity
+                    onPress={() => navigation.navigate('Depenses-fixes')}
+                >
+                    <FixExpense navigation={navigation} />
+                </TouchableOpacity>
+            </View>
+        </SafeAreaView>
+    )
+}
+
+const StackHome = createStackNavigator();
 const HomeStack = () => {
     return(
         <StackHome.Navigator initialRouteName='Accueil'>
             <StackHome.Screen name='Accueil' component={HomeScreen} options={navOptionHandler} />
+            <StackHome.Screen name='Revenus-fixes' component={FixIncomeScreen} options={navOptionHandler} />
+            <StackHome.Screen name='Depenses-fixes' component={FixExpenseScreen} options={navOptionHandler} />
         </StackHome.Navigator>
     )
 }
@@ -94,6 +117,8 @@ const ListScreen = ({navigation}) => {
         </SafeAreaView>
     )
 }
+
+const StackList = createStackNavigator();
 const ListStack = () => {
     return(
         <StackList.Navigator initialRouteName='Liste'>
@@ -102,28 +127,7 @@ const ListStack = () => {
     )
 }
 
-// const VarIncomeScreen = ({navigation}) => {
-//     return (
-//         <SafeAreaView style={{ flex: 1 }}>
-//             <CustomHeader title='Revenus variables' navigation={navigation} />
-//             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-//                 <TouchableOpacity
-//                     onPress={() => navigation.navigate('Revenus-variables')}
-//                 >
-//                     <Income />
-//                 </TouchableOpacity>
-//             </View>
-//         </SafeAreaView>
-//     )
-// }
-// const VarIncomeStack = () => {
-//     return(
-//         <StackIncome.Navigator initialRouteName='Revenus-variables'>
-//             <StackIncome.Screen name='Revenus-variables' component={VarIncomeScreen} options={navOptionHandler} />
-//         </StackIncome.Navigator>
-//     )
-// }
-
+const StackVar = createStackNavigator();
 const VarScreen = ({navigation}) => {
     return (
         <SafeAreaView style={{ flex: 1 }}>
@@ -145,6 +149,8 @@ const VarStack = () => {
         </StackVar.Navigator>
     )
 }
+
+const Tab = createBottomTabNavigator();
 
 const Navigation = () => {
     return(

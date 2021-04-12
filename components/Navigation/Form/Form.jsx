@@ -65,8 +65,8 @@ const Form = () => {
                             dropDownStyle={{ borderRadius: 23, borderColor: '#2D3436' }}
                             style={{ marginTop: 20, borderRadius: 23, borderColor: '#2D3436' }}
                             items={[
-                                { label: 'Revenu', value: 'incomes' },
-                                { label: 'Dépense', value: 'expenses' }
+                                { label: 'Revenu variable', value: 'incomes' },
+                                { label: 'Dépense variable', value: 'expenses' }
                             ]}
                             defaultValue={selectTransaction}
                             onChangeItem={item => setSelectTransaction(item.value)}
@@ -148,12 +148,6 @@ const Form = () => {
 }
 
 const styles = StyleSheet.create({
-    // containerGeneralVar: {
-    //     flex: 1,
-    //     width: width,
-    //     height: height,
-    //     alignItems: 'center',
-    // },
     containerVar: {
         flex: 1,
         width: 250,

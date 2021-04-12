@@ -1,12 +1,9 @@
 import React from 'react';
 import {
-    StyleSheet, View, Image, Text, TouchableOpacity
+    StyleSheet, View, Image, Text, TouchableOpacity, Button
 } from 'react-native';
 
-import Income from './Income/Income';
-import FixExpense from './FixExpense/FixExpense';
-
-const Homepage = ({navigation}) => {
+const Homepage = ({ navigation }) => {
     let income = 2000;
     let expense = 665;
     let total = income - expense;
@@ -28,7 +25,7 @@ const Homepage = ({navigation}) => {
 
                 <View style={styles.containerBtnUpdate}>
                     <TouchableOpacity
-                        onPress={() => navigation.navigate('Revenus')}
+                        onPress={() => navigation.navigate('Revenus-fixes')}
                     >
                         <Image source={require('../../../assets/icons/edit-green.png')} style={styles.iconPen} />
                     </TouchableOpacity>

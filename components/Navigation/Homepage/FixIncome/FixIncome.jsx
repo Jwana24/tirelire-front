@@ -3,19 +3,19 @@ import {
     StyleSheet, View, Image, Text
 } from 'react-native';
 
-const VarExpense = () => {
+const FixIncome = () => {
     return (
         <View>
-            <Image source={require('../../../../assets/icons/edit-red.png')} style={styles.iconExpense} />
+            <Text>Revenus fixes</Text>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
-    iconExpense: {
+    iconIncome: {
         width: 27,
         height: 26,
     },
 });
 
-export default VarExpense;
+export default FixIncome;

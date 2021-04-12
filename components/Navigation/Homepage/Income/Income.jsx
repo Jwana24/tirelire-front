@@ -86,7 +86,7 @@ const Income = () => {
                             <FlatList
                                 data={incomeData}
                                 keyExtractor={(item) => item.income_id}
-                                renderItem={({ item }) => <FormIncome income={item} />}
+                                // renderItem={({ item }) => <FormIncome income={item} />}
                             />
                         </View>
                     </View>
