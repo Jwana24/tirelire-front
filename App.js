@@ -1,11 +1,13 @@
+// modules
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { useFonts } from 'expo-font';
 import AppLoading from 'expo-app-loading';
 import { NavigationContainer } from '@react-navigation/native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 
+// components
 import Navigation from './components/Navigation/Navigation';
 
 export default function App() {

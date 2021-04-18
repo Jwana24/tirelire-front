@@ -8,7 +8,6 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input, Button } from 'react-native-elements';
 
 import { API_URL } from '@env';
-import FormIncome from './FormIncome/FormIncome';
 
 const Income = () => {
     const { control, handleSubmit, errors } = useForm();
@@ -32,32 +31,11 @@ const Income = () => {
         Axios.get(`${API_URL}/api/incomes`)
         .then(res => {
             setIncomeData(res.data);
-            // console.log('test')
         })
         .catch(err => {
             console.log(err);
         });
     }, []);
-
-    // const postIncome = () => {
-    //     Axios.post(`${API_URL}/api/incomes`, incomeData)
-    //     .then(res => {
-    //         if (res.data.status == 'success') {
-    //             setIncomeData(res.data);
-    //             console.log(incomeData);
-    //         }
-    //         else {
-    //             console.log('merde')
-    //         }
-    //     })
-    //     .catch(err => {
-    //         console.log(err.res.data.message);
-    //     });
-    // };
-    
-    // useEffect(() => {
-    //     postIncome();
-    // }, []);
 
     return (
         <KeyboardAvoidingView

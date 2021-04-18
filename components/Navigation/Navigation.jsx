@@ -1,3 +1,4 @@
+// modules
 import React from 'react';
 import {
     View, Image, Text, TouchableOpacity, SafeAreaView
@@ -5,11 +6,12 @@ import {
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 
+// components
 import Homepage from './Homepage/Homepage';
 import FixIncome from './Homepage/FixIncome/FixIncome';
 import FixExpense from './Homepage/FixExpense/FixExpense';
 import List from './Homepage/List/List';
-import Form from './Form/Form';
+import Transaction from './Transaction/Transaction';
 
 const CustomHeader = ({ title, isHome, navigation }) => {
     return (
@@ -136,7 +138,7 @@ const VarScreen = ({navigation}) => {
                 <TouchableOpacity
                     onPress={() => navigation.navigate('Transactions-variables')}
                 >
-                    <Form />
+                    <Transaction />
                 </TouchableOpacity>
             </View>
         </SafeAreaView>
@@ -158,19 +160,23 @@ const Navigation = () => {
             screenOptions={({ route }) => ({
                 tabBarIcon: ({ focused }) => {
                     let iconName;
-        
-                    if (route.name === 'Accueil') {
-                        iconName = focused
-                        ? require('../../assets/icons/home.png')
-                        : require('../../assets/icons/home-black.png');
-                    } else if (route.name === 'Liste') {
-                        iconName = focused
-                        ? require('../../assets/icons/liste.png')
-                        : require('../../assets/icons/liste-black.png');
-                    } else if (route.name === 'Transactions var.') {
-                        iconName = focused
-                        ? require('../../assets/icons/revenus.png')
-                        : require('../../assets/icons/revenus-black.png');
+
+                    switch(route.name) {
+                        case 'Accueil':
+                            iconName = focused
+                            ? require('../../assets/icons/home.png')
+                            : require('../../assets/icons/home-black.png');
+                            break;
+                        case 'Liste':
+                            iconName = focused
+                            ? require('../../assets/icons/liste.png')
+                            : require('../../assets/icons/liste-black.png');
+                            break;
+                        case 'Transactions var.':
+                            iconName = focused
+                            ? require('../../assets/icons/revenus.png')
+                            : require('../../assets/icons/revenus-black.png');
+                            break;
                     }
         
                     // You can return any component that you like here!
