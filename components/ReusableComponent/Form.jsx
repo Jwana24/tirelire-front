@@ -8,7 +8,6 @@ import { Button } from 'react-native-elements';
 
 const Form = ({
     titleForm,
-    // isButton,
     isSelect, itemSelect, valueSelect, onChangeSelect,
     titleNameTrans, nameTrans, onChangeTextName,
     accountTrans, onChangeTextAccount,
@@ -138,37 +137,6 @@ const styles = StyleSheet.create({
     containerContent: {
         flex: 2,
     },
-    // addIncome: {
-    //     flexDirection: 'row',
-    //     justifyContent: 'center',
-    //     alignItems: 'center',
-    //     marginVertical: 25,
-    // },
-    // containerPlus: {
-    //     width: 53,
-    //     height: 53,
-    //     justifyContent: 'center',
-    //     alignItems: 'center',
-    //     marginRight: 15,
-    //     backgroundColor: '#ffff',
-    //     borderRadius: 50,
-    //     shadowColor: '#bdc3c7',
-    //     shadowOffset: { width: 0, height: 2 },
-    //     shadowOpacity: 0.8,
-    //     shadowRadius: 2,
-    // },
-    // plusIncome: {
-    //     fontFamily: 'Rubik-Regular',
-    //     fontSize: 40,
-    //     color: '#A0D4A0'
-    // },
-    // containerTextAddIncome: {
-    //     flex: 0.8,
-    // },
-    // textAddIncome: {
-    //     fontFamily: 'Rubik-Light',
-    //     fontSize: 20,
-    // },
     picker: {
         flex: 0.5
     },

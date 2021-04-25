@@ -66,6 +66,7 @@ const Transaction = () => {
                     onChangeTextName={name => setTransaction({...transaction, name})}
                     accountTrans={transaction.amount}
                     onChangeTextAccount={amount => setTransaction({...transaction, amount})}
+                    dateInput={transaction.date}
                     onDateChange={date => setTransaction({...transaction, date})}
                     isBtnValidate
                     onPress={handleSubmit}
