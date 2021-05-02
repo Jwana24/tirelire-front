@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-    StyleSheet, View, TextInput, Text, Image
+    StyleSheet, View, TextInput, Text, Image, TouchableWithoutFeedback
 } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 import DatePicker from 'react-native-datepicker';
@@ -9,10 +9,11 @@ import { Button } from 'react-native-elements';
 const Form = ({
     titleForm,
     isSelect, itemSelect, valueSelect, onChangeSelect,
-    titleNameTrans, nameTrans, onChangeTextName,
+    titleNameTrans, nameTrans, onChangeTextName, isDelete, showModal,
     accountTrans, onChangeTextAccount,
     dateInput, onDateChange,
-    isBtnValidate, onPress
+    isBtnValidate, onValidate, btnStyle,
+    colorStyle
 }) => {
     return (
         <View style={styles.containerVar}>
@@ -20,20 +21,8 @@ const Form = ({
                 <Text style={styles.title}>{titleForm}</Text>
             </View>
             <View style={styles.containerContent}>
-                {/* {
-                    isButton ?
-                    <View style={styles.addIncome}>
-                        <View style={styles.containerPlus}>
-                            <Text style={styles.plusIncome}>+</Text>
-                        </View>
-                        <View style={styles.containerTextAddIncome}>
-                            <Text style={styles.textAddIncome}>Ajouter un nouveau revenu</Text>
-                        </View>
-                    </View>
-                    : null
-                } */}
                 {
-                    isSelect ?
+                    isSelect &&
                     <DropDownPicker
                         dropDownStyle={{ borderRadius: 23, borderColor: '#2D3436' }}
                         style={{ marginTop: 20, borderRadius: 23, borderColor: '#2D3436' }}
@@ -42,16 +31,26 @@ const Form = ({
                         onChangeItem={onChangeSelect}
                         placeholder='Type de transaction'
                     />
-                    : null
                 }
                 <View style={{ justifyContent: 'center', }}>
                     <View>
-                        <Text style={styles.label}>{titleNameTrans}</Text>
+                        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+                            <Text style={styles.label}>{titleNameTrans}</Text>
+                            {
+                                isDelete &&
+                                <TouchableWithoutFeedback onPress={showModal}>
+                                    <Image
+                                        source={require('../../assets/icons/delete.png')}
+                                        style={styles.iconTrash}
+                                    />
+                                </TouchableWithoutFeedback>
+                            }
+                        </View>
                         <TextInput
                             defaultValue={nameTrans}
                             onChangeText={onChangeTextName}
                             keyboardAppearance='dark'
-                            style={styles.input}
+                            style={colorStyle}
                             errorStyle={{ color: 'red' }}
                         />
                     </View>
@@ -68,7 +67,7 @@ const Form = ({
                             numeric
                             defaultValue={accountTrans}
                             onChangeText={onChangeTextAccount}
-                            style={styles.input}
+                            style={colorStyle}
                             errorStyle={{ color: 'red' }}
                         />
                     </View>
@@ -77,14 +76,13 @@ const Form = ({
                         <Text style={styles.label}>Date</Text>
 
                         <DatePicker
-                            // date='20/03/21'
                             date={dateInput}
                             mode='date'
                             format="DD-MM-YYYY"
                             confirmBtnText='Valider'
                             cancelBtnText='Annuler'
                             placeholder='Sélectionner une date'
-                            style={styles.input}
+                            style={colorStyle}
                             iconSource={require('../../assets/icons/calendar.png')}
                             customStyles={{
                                 dateIcon: {
@@ -107,13 +105,12 @@ const Form = ({
                 </View>
 
                 {
-                    isBtnValidate ?
+                    isBtnValidate &&
                     <Button
                         title='Valider'
-                        onPress={onPress}
-                        buttonStyle={styles.btnValidate}
+                        onPress={onValidate}
+                        buttonStyle={btnStyle}
                     />
-                    : null
                 }
             </View>
         </View>
@@ -151,13 +148,9 @@ const styles = StyleSheet.create({
         fontSize: 18,
         color: '#2D3436',
     },
-    input: {
-        width: '100%',
-        height: 40,
-        paddingHorizontal: 15,
-        borderWidth: 1,
-        borderColor: '#A0D4A0',
-        borderRadius: 23,
+    iconTrash: {
+        width: 26,
+        height: 24,
     },
     iconEuro: {
         position: 'absolute',

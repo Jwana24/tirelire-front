@@ -1,7 +1,7 @@
 // modules
 import React, { useState, useEffect } from 'react';
 import {
-    KeyboardAvoidingView, ScrollView
+    StyleSheet, KeyboardAvoidingView, ScrollView
 } from 'react-native';
 import { API_URL } from '@env';
 import Axios from 'axios';
@@ -53,6 +53,7 @@ const Transaction = () => {
                 showsVerticalScrollIndicator='false'
             >
                 <Form
+                    colorStyle={styles.input}
                     titleForm='Ajouter une transaction'
                     isSelect
                     itemSelect={[
@@ -69,11 +70,28 @@ const Transaction = () => {
                     dateInput={transaction.date}
                     onDateChange={date => setTransaction({...transaction, date})}
                     isBtnValidate
-                    onPress={handleSubmit}
+                    onValidate={handleSubmit}
+                    btnStyle={styles.btnSubmit}
                 />
             </ScrollView>
         </KeyboardAvoidingView>
     );
 }
+
+const styles = StyleSheet.create({
+    input: {
+        width: '100%',
+        height: 40,
+        paddingHorizontal: 15,
+        borderWidth: 1,
+        borderRadius: 23,
+        borderColor: '#2D3436',
+    },
+    btnSubmit: {
+        marginTop: 20,
+        borderRadius: 23,
+        backgroundColor: '#2D3436',
+    },
+});
 
 export default Transaction;
