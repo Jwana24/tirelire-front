@@ -3,7 +3,7 @@ import {
     StyleSheet, View, TextInput, Text, Image, TouchableWithoutFeedback
 } from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
-import DatePicker from 'react-native-datepicker';
+import DatePicker from '@react-native-community/datetimepicker';
 import { Button } from 'react-native-elements';
 
 const Form = ({
@@ -100,6 +100,7 @@ const Form = ({
                                 }
                             }}
                             onDateChange={onDateChange}
+                            value={dateInput ?? new Date()}
                         />
                     </View>
                 </View>
